@@ -1,0 +1,76 @@
+#
+# More common Spring Boot properties here:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+#
+amedia:
+    gaia:
+        baseUrl: http://localhost:9050/gaia
+    zipkin:
+        app-name: arnon
+        collector-host: localhost
+        collector-port: 9078
+        enabled: false
+    # Keep this even though you will not connect to Graphite.
+    graphite:
+        host: localhost
+        port: 2003
+
+
+spring:
+    application:
+        name: arnon
+    freemarker:
+        cache: false # This should be set to true in production.
+    mvc:
+        locale: No_no
+        date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    jackson:
+        date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ # Controls the date format in the REST api and where Jackson is used by Spring.
+
+server:
+    port: 9096
+
+config:
+    datasource:
+        driverClass     : com.mysql.jdbc.Driver
+        jdbcUrl         : jdbc:mysql://localhost/arnon?useUnicode=true&amp;characterEncoding=UTF-8
+        user            : arnon
+        password        : pingu123
+        maxIdleTime     : 3600
+        checkoutTimeout : 2000
+
+liquibase:
+    change-log: classpath:/liquibase/arnon.db.changelog.xml
+    drop-first: false
+    enabled: true
+
+endpoints:
+    enabled: true
+    health:
+        enabled: true
+        sensitive: false
+management:
+    health:
+        db:
+            enabled: false
+        diskspace:
+            enabled: true
+            path: .
+            threshold: 10485760
+        mongo:
+            enabled: false
+        status:
+            order: DOWN, OUT_OF_SERVICE, UNKNOWN, UP
+    port: 19096
+    address: 127.0.0.1
+
+cxense:
+    endpoint: https://api.cxense.com
+    username: accounts@lister.api.no
+    secretkey: api&user&lNJDYfUYJ7cVFkyLHxZ5WA==
+
+google:
+    clientId: 600070923873-apji8a07nssbi85ovl1i6kiu21ji2u9o.apps.googleusercontent.com
+    clientSecret: xlI5hgINSsJR1VhNsuvWNvIw
+    folderId: 0B-h_cXjl7HnqfjdNd2JvTm9Od25IWVpPUERUUFl0NFRXU01OVVkzNVJSME4xaXZsMm5rN1E
+    sheetTemplateId: 18dw4eWL47vmgWGXmjWOvLiRbfwEh0Yk-4uD1QRLJcoE
