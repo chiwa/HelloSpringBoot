@@ -1,17 +1,21 @@
 package com.zengcode.th;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ThreadPoolRejectedPolicy;
 import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.jms.ConnectionFactory;
+import javax.sql.DataSource;
 
 import static org.apache.activemq.camel.component.ActiveMQComponent.*;
 
@@ -19,6 +23,16 @@ import static org.apache.activemq.camel.component.ActiveMQComponent.*;
 @Configuration
 public class MyAppConfig extends WebMvcConfigurerAdapter {
 
+    @Bean
+    @ConfigurationProperties(prefix = "config.datasource")
+    public DataSource dataSource() {
+        return new ComboPooledDataSource();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Bean
     CamelContextConfiguration contextConfiguration() {
@@ -45,5 +59,7 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/*");
     }
+
+
 
 }

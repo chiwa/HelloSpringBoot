@@ -13,3 +13,12 @@ spring:
         name: ZengCode
     freemarker:
         cache: false # This should be set to true in production.
+
+config:
+    datasource:
+        driverClass     : com.mysql.jdbc.Driver
+        jdbcUrl         : jdbc:mysql://localhost/arnon?useUnicode=true&amp;characterEncoding=UTF-8
+        user            : arnonx
+        password        : pingu123
+        maxIdleTime     : 3600
+        checkoutTimeout : 2000
