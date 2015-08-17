@@ -8,6 +8,8 @@ import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.jms.ConnectionFactory;
 
@@ -15,7 +17,7 @@ import static org.apache.activemq.camel.component.ActiveMQComponent.*;
 
 
 @Configuration
-public class MyAppConfig {
+public class MyAppConfig extends WebMvcConfigurerAdapter {
 
 
     @Bean
@@ -37,6 +39,11 @@ public class MyAppConfig {
                 context.addComponent("activemq", jmsComponentAutoAcknowledge(connectionFactory));
             }
         };
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/*");
     }
 
 }
