@@ -18,7 +18,7 @@ config:
     datasource:
         driverClass     : com.mysql.jdbc.Driver
         jdbcUrl         : jdbc:mysql://localhost/arnon?useUnicode=true&amp;characterEncoding=UTF-8
-        user            : arnonx
+        user            : arnon
         password        : pingu123
         maxIdleTime     : 3600
         checkoutTimeout : 2000
