@@ -28,7 +28,9 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
     @Bean
     @ConfigurationProperties(prefix = "config.datasource")
     public DataSource dataSource() {
-        return new ComboPooledDataSource();
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setJdbcUrl("jdbc:mysql://localhost/arnon?useUnicode=true&amp;characterEncoding=UTF-8");
+        return  dataSource;
     }
 
     @Bean
@@ -59,6 +61,15 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        /**
+         * registry.addInterceptor(interceptor)
+         .addPathPatterns("/**")
+         .excludePathPatterns("/arnon/apiadmin/**",
+         "/arnon/accessdenied.html",
+         "/arnon/authenticated.html",
+         "/arnon/ajax/**",
+         "/arnon/static/**");
+         */
         registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/*");
     }
 
