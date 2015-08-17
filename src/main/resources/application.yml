@@ -7,3 +7,9 @@ connection:
     server :
           dev : dev-server
           production : prod-server
+
+spring:
+    application:
+        name: ZengCode
+    freemarker:
+        cache: false # This should be set to true in production.
