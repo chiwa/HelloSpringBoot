@@ -24,7 +24,7 @@ import static org.apache.activemq.camel.component.ActiveMQComponent.*;
 @Configuration
 public class MyAppConfig extends WebMvcConfigurerAdapter {
 
-    @Profile("default")
+    /*@Profile("default")
     @Bean
     @ConfigurationProperties(prefix = "config.datasource")
     public DataSource dataSource() {
@@ -32,13 +32,13 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
         dataSource.setJdbcUrl("jdbc:mysql://localhost/arnon?useUnicode=true&amp;characterEncoding=UTF-8");
         return  dataSource;
     }
-
+*/
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
-    @Bean
+   @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
@@ -53,8 +53,8 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
                 threadPoolProfile.setRejectedPolicy(ThreadPoolRejectedPolicy.Abort);
                 context.getExecutorServiceManager().registerThreadPoolProfile(threadPoolProfile);
 
-                ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
-                context.addComponent("activemq", jmsComponentAutoAcknowledge(connectionFactory));
+                //ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+                //context.addComponent("activemq", jmsComponentAutoAcknowledge(connectionFactory));
             }
         };
     }
@@ -70,7 +70,7 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
          "/arnon/ajax/**",
          "/arnon/static/**");
          */
-        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/*");
+        //registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/*");
     }
 
 

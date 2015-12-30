@@ -17,23 +17,24 @@ public class HelloController {
     @Autowired
     private ApplicationConfiguration applicationConfiguration;
 
-    private DataSource dataSource;
+   // private DataSource dataSource;
 
-    private JdbcTemplate jdbcTemplate;
+    //private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    //@Autowired
+    //public void setDataSource(DataSource dataSource) {
+       // this.dataSource = dataSource;
+    //}
 
     @RequestMapping("/")
     public String index() {
-
+        return "Hello version 1.0.0";
+          /*
         String sql = "select COUNT(*) from publication";
 
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.queryForObject(sql, Integer.class);
-        return "Greetings from Spring Boot! " + applicationConfiguration.getUsername() + " : " + applicationConfiguration.getServerConfiguration().getDev();
+        jdbcTemplate.queryForObject(sql, Integer.class);*/
+        //return "Greetings from Spring Boot! " + applicationConfiguration.getUsername() + " : " + applicationConfiguration.getServerConfiguration().getDev();
     }
 
 

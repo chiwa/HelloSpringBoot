@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 
-@Component
+//@Component
 public class MyRouter extends RouteBuilder {
 
     @Autowired
