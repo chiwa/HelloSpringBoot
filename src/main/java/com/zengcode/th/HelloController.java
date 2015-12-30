@@ -28,7 +28,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        return "Hello version 1.0.0";
+        return "Hello version 1.0.1";
           /*
         String sql = "select COUNT(*) from publication";
 
